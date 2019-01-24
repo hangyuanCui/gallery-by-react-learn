@@ -1,10 +1,25 @@
-import styles from './index.css';
-import Main from '../components/main';
+import React from 'react';
 
-export default function() {
-  return (
-    <div className={styles.normal}>
-      <Main />
-    </div>
-  );
+let imageData = require('../assets/data/image-data.json');
+
+imageData = (function(imageData) {
+    return imageData.map((item) => {
+        item.imageURL = require('../assets/images/' + item.fileName);
+        return item;
+    })
+})(imageData);
+  
+
+export default class Main extends React.Component {
+
+    render() {
+        return (
+            <section className="stage">
+                <section className="img-sec">
+                </section>
+                <nav className="controller-nav">
+                </nav>
+            </section>
+        );
+    }
 }
