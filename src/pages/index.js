@@ -1,25 +1,34 @@
 import React from 'react';
+import ImgFigure from '../components/ImgFigure';
 
-let imageData = require('../assets/data/image-data.json');
+let imageDatas = require('../assets/data/image-data.json');
 
-imageData = (function(imageData) {
-    return imageData.map((item) => {
+imageDatas = (function(imageDatas) {
+    return imageDatas.map((item) => {
         item.imageURL = require('../assets/images/' + item.fileName);
         return item;
     })
-})(imageData);
-  
+})(imageDatas);
 
 export default class Main extends React.Component {
 
-    render() {
-        return (
-            <section className="stage">
-                <section className="img-sec">
-                </section>
-                <nav className="controller-nav">
-                </nav>
+  render() {
+    let controllerUnits = [];
+    let imgFigures = [];
+
+    imageDatas.forEach((item) => {
+      imgFigures.push(<ImgFigure data={item} key={item.id}/>);
+    })
+
+    return (
+        <section className="stage">
+            <section className="img-sec">
+            {imgFigures}
             </section>
-        );
-    }
+            <nav className="controller-nav">
+            {controllerUnits}
+            </nav>
+        </section>
+    );
+  }
 }
